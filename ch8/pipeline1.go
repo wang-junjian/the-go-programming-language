@@ -16,13 +16,21 @@ func main() {
 	}()
 
 	go func() {
-		for x := range naturals {
+		for {
+			x, ok := <-naturals
+			if !ok {
+				break
+			}
 			squares <- x*x
 		}
 		close(squares)
 	}()
 
-	for x := range squares {
+	for {
+		x, ok := <-squares
+		if !ok {
+			break
+		}
 		fmt.Println(x)
 	}
 }
