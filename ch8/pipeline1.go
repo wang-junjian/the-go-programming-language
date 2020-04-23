@@ -17,12 +17,20 @@ func main() {
 
 	go func() {
 		for {
-			x := <-naturals
+			x, ok := <-naturals
+			if !ok {
+				break
+			}
 			squares <- x*x
 		}
+		close(squares)
 	}()
 
 	for {
-		fmt.Println(<-squares)
+		x, ok := <-squares
+		if !ok {
+			break
+		}
+		fmt.Println(x)
 	}
 }
