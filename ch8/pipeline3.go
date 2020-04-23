@@ -2,21 +2,21 @@ package main
 
 import "fmt"
 
-func counter(out chan int) {
+func counter(out chan<- int) {
 	for x:=0; x<100; x++ {
 		out <- x
 	}
 	close(out)
 }
 
-func squarer(out, in chan int) {
+func squarer(out chan<- int, in <-chan int) {
 	for x := range in {
 		out <- x*x
 	}
 	close(out)
 }
 
-func printer(in chan int) {
+func printer(in <-chan int) {
 	for x := range in {
 		fmt.Println(x)
 	}
