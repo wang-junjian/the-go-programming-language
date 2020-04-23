@@ -9,9 +9,10 @@ func main() {
 	squares := make(chan int)
 
 	go func() {
-		for x:=0; ; x++ {
+		for x:=0; x<100; x++ {
 			naturals <- x
 		}
+		close(naturals)
 	}()
 
 	go func() {
