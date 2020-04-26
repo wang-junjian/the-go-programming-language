@@ -1,2 +1,1 @@
-# the-go-programming-language
-The Go Programming Language
+# Go程序设计语言（The Go Programming Language）
